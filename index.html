@@ -3,6 +3,13 @@
     <head>
         <meta charset="UTF-8" />
         <title>Takie tam</title>
+        <style>
+         #wynik {
+             border: 1px solid black;
+             font-family: monospace;
+             white-space: pre;
+         }
+        </style>
         <script>
 
          function shuffleArray(array) {
@@ -57,13 +64,13 @@
              console.log(doWypisu);
 
              for(var i = 0 ; i < doWypisu.length ; i += poIle) {
-                 wynik.value += doWypisu.slice(i, i + poIle).join(", ");
-                 wynik.value += "\n";
+                 wynik.textContent += doWypisu.slice(i, i + poIle).join(", ");
+                 wynik.textContent += "\n";
              }
          }
 
          function resetuj() {
-             document.getElementById('wynik').value = "";
+             document.getElementById('wynik').textContent = "";
          }
          
         </script>
@@ -89,7 +96,7 @@
                 <input type="reset" value="Wyczyść wynik" onclick="javascript:resetuj(); return false;" />
             </div>
 
-            <div><textarea id="wynik"></textarea></div>
+            <div><div id="wynik"></div></div>
         </div>
     </body>
 </html>
