@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Takie tam</title>
+        <script>
+
+         function shuffleArray(array) {
+             for (var i = array.length - 1; i > 0; i--) {
+                 var j = Math.floor(Math.random() * (i + 1));
+                 var temp = array[i];
+                 array[i] = array[j];
+                 array[j] = temp;
+             }
+             return array;
+         }
+
+         function generujLitery(start, end) {
+             var poczatek = start.charCodeAt(0);
+             var koniec = end.charCodeAt(0);
+
+             var tablica = [];
+
+             for(var i = poczatek ; i <= koniec ; ++i) {
+                 tablica.push(String.fromCharCode(i));
+             }
+
+             return tablica;
+         }
+
+         function generujLiczby(start, end) {
+             var poczatek = parseInt(start);
+             var koniec = parseInt(end);
+
+             var tablica = [];
+
+             for(var i = poczatek ; i <= koniec ; ++i) {
+                 tablica.push(i);
+             }
+             return tablica;
+         }
+
+         function generuj() {
+             resetuj();
+             var litery = generujLitery(document.getElementById('zakres-liter-start').value, document.getElementById('zakres-liter-end').value);
+             var liczby = generujLiczby(document.getElementById('zakres-liczb-start').value, document.getElementById('zakres-liczb-end').value);
+             var poIle = parseInt(document.getElementById('po-ile').value);
+
+             var wynik = document.getElementById('wynik');
+
+             var wszystko = litery.concat(liczby);
+
+             console.log(wszystko);
+
+             var doWypisu = shuffleArray(wszystko);
+
+             console.log(doWypisu);
+
+             for(var i = 0 ; i < doWypisu.length ; i += poIle) {
+                 wynik.value += doWypisu.slice(i, i + poIle).join(", ");
+                 wynik.value += "\n";
+             }
+         }
+
+         function resetuj() {
+             document.getElementById('wynik').value = "";
+         }
+         
+        </script>
+    </head>
+    <body>
+        <div class="formularz">
+            <div>Zakres liter.
+                <input type="text" maxlength="1" id="zakres-liter-start" />
+                <input type="text" maxlength="1" id="zakres-liter-end" />
+            </div>
+
+            <div>Zakres liczb.
+                <input type="number" id="zakres-liczb-start" />
+                <input type="number" id="zakres-liczb-end" />
+            </div>
+            
+            <div>Po ile wyciągać.
+                <input type="number" id="po-ile" />
+            </div>
+
+            <div>
+                <input type="submit" value="Generuj" onclick="javascript:generuj(); return false;" />
+                <input type="reset" value="Wyczyść wynik" onclick="javascript:resetuj(); return false;" />
+            </div>
+
+            <div><textarea id="wynik"></textarea></div>
+        </div>
+    </body>
+</html>
